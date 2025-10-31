@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace KooliProjekt.Application.Features.Klient_ 
 { 
-    public class klient_query : IRequest<OperationResult<IList<Arve>>>
+    public class klient_query : IRequest<OperationResult<IList<Klient>>>
     {
-
+        public int Page { get; set; }
+        public int PageSize { get; set; }
     }
 }

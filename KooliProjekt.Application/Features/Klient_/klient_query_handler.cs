@@ -1,5 +1,6 @@
 ﻿using KooliProjekt.Application.Data;
 using KooliProjekt.Application.Features.Arve_;
+using KooliProjekt.Application.Infrastructure.Paging;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace KooliProjekt.Application.Features.Klient_
 {
-    public class klient_query_handler : IRequest<OperationResult<IList<Arve>>>
+    public class klient_query_handler : IRequest<OperationResult<PagedResult<Klient>>>
     {
         private readonly ApplicationDbContext _db_context;
 
@@ -21,13 +22,13 @@ namespace KooliProjekt.Application.Features.Klient_
             _db_context = db_context;
         }
 
-        public async Task<OperationResult<IList<Arve>>> Handle(klient_query request, CancellationToken cancellationToken)
+        public async Task<OperationResult<PagedResult<Klient>>> Handle(klient_query request, CancellationToken cancellationToken)
         {
-            var result = new OperationResult<IList<Arve>>();
+            var result = new OperationResult<PagedResult<Klient>>();
             result.Value = await _db_context
-                .to_arve
+                .to_klient
                 .OrderBy(list => list.id)
-                .ToListAsync();
+                .GetPagedAsync(request.Page, request.PageSize);
 
             return result;
         }

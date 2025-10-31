@@ -11,6 +11,7 @@ namespace KooliProjekt.Application.Features.Auto_
 {
     public class auto_query : IRequest<OperationResult<IList<Arve>>>
     {
-
+        public int Page { get; set; }
+        public int PageSize { get; set; }
     }
 }

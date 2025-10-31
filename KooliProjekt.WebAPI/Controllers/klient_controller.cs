@@ -15,9 +15,8 @@ namespace KooliProjekt.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List([FromQuery] klient_query query)
         {
-            var query = new klient_query();
             var result = await _mediator.Send(query);
 
             return Result(result);
