@@ -21,5 +21,24 @@ namespace KooliProjekt.WebAPI.Controllers
 
             return Result(result);
         }
+
+        [HttpGet]
+        [Route("Get")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var query = new arve_get_query { Id = id };
+            var response = await _mediator.Send(query);
+
+            return Result(response);
+        }
+
+        [HttpPost]
+        [Route("Save")]
+        public async Task<IActionResult> Save(arve_save_command command)
+        {
+            var response = await _mediator.Send(command);
+
+            return Result(response);
+        }
     }
 }
