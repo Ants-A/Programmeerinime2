@@ -14,6 +14,6 @@ namespace KooliProjekt.Application.Features.Klient_
         public int Id { get; set; }
         public string nimi { get; set; }
         public string email { get; set; }
-        public string phone { get; set; }
+        public int phone { get; set; }
     }
 }

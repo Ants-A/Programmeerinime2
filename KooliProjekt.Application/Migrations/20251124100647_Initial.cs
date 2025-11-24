@@ -47,51 +47,12 @@ namespace KooliProjekt.Application.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     nimi = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    phone = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    phone = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_to_klient", x => x.id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "ToDoLists",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ToDoLists", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ToDoItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDone = table.Column<bool>(type: "bit", nullable: false),
-                    ToDoListId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ToDoItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ToDoItems_ToDoLists_ToDoListId",
-                        column: x => x.ToDoListId,
-                        principalTable: "ToDoLists",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ToDoItems_ToDoListId",
-                table: "ToDoItems",
-                column: "ToDoListId");
         }
 
         /// <inheritdoc />
@@ -105,12 +66,6 @@ namespace KooliProjekt.Application.Migrations
 
             migrationBuilder.DropTable(
                 name: "to_klient");
-
-            migrationBuilder.DropTable(
-                name: "ToDoItems");
-
-            migrationBuilder.DropTable(
-                name: "ToDoLists");
         }
     }
 }

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KooliProjekt.Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251017075448_Initial")]
+    [Migration("20251124100647_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -79,63 +79,12 @@ namespace KooliProjekt.Application.Migrations
                     b.Property<string>("nimi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("phone")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("phone")
+                        .HasColumnType("int");
 
                     b.HasKey("id");
 
                     b.ToTable("to_klient");
-                });
-
-            modelBuilder.Entity("KooliProjekt.Application.Data.ToDoItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsDone")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ToDoListId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ToDoListId");
-
-                    b.ToTable("ToDoItems");
-                });
-
-            modelBuilder.Entity("KooliProjekt.Application.Data.ToDoList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ToDoLists");
-                });
-
-            modelBuilder.Entity("KooliProjekt.Application.Data.ToDoItem", b =>
-                {
-                    b.HasOne("KooliProjekt.Application.Data.ToDoList", "ToDoList")
-                        .WithMany()
-                        .HasForeignKey("ToDoListId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ToDoList");
                 });
 #pragma warning restore 612, 618
         }

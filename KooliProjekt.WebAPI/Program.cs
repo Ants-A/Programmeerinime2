@@ -53,6 +53,19 @@ namespace KooliProjekt.WebAPI
 
             app.MapControllers();
 
+            using (var scope = app.Services.CreateScope())
+            using (var db_context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
+            {
+                db_context.Database.Migrate();
+
+                // 14.11.2025
+                // Andmete genereerimise lubame ainult Debug-režiimis
+            #if (DEBUG)
+                var generator = new SeedData(db_context);
+                generator.Generate();
+            #endif
+            }
+
             app.Run();
         }
     }

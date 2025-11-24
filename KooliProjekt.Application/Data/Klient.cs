@@ -11,6 +11,6 @@ namespace KooliProjekt.Application.Data
         public int id { get; set; }
         public string nimi { get; set; }
         public string email { get; set; }
-        public string phone { get; set; }
+        public int phone { get; set; }
     }
 }
