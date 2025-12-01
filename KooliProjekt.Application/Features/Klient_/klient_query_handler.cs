@@ -27,7 +27,7 @@ namespace KooliProjekt.Application.Features.Klient_
             var result = new OperationResult<PagedResult<Klient>>();
             result.Value = await _db_context
                 .to_klient
-                .OrderBy(list => list.id)
+                .OrderBy(list => list.Id)
                 .GetPagedAsync(request.Page, request.PageSize);
 
             return result;

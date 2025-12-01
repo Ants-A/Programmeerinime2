@@ -1,4 +1,5 @@
 ﻿using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Data.Repositories;
 using KooliProjekt.Application.Features.Klient_;
 using KooliProjekt.Application.Infrastructure.Paging;
 using KooliProjekt.Application.Infrastructure.Results;
@@ -15,9 +16,9 @@ namespace KooliProjekt.Application.Features.Klient_
 {
     public class klient_save_command_handler : IRequestHandler<klient_save_command, OperationResult>
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly i_klient_repository _dbContext;
 
-        public klient_save_command_handler(ApplicationDbContext dbContext)
+        public klient_save_command_handler(i_klient_repository dbContext)
         {
             _dbContext = dbContext;
         }
@@ -27,22 +28,17 @@ namespace KooliProjekt.Application.Features.Klient_
             var result = new OperationResult();
 
             var list = new Klient();
-            if(request.Id == 0)
+            if (request.Id != 0)
             {
-                await _dbContext.to_klient.AddAsync(list);
+                list = await _dbContext.GetByIdAsync(request.Id);
             }
-            else
-            {
-                list = await _dbContext.to_klient.FindAsync(request.Id);
-                //_dbContext.ToDoLists.Update(list);
-            }     
-            
-            list.id = request.Id;
+
+            list.Id = request.Id;
             list.phone = request.phone;
             list.email = request.email;
             list.nimi = request.nimi;
 
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveAsync(list);
 
             return result;
         }

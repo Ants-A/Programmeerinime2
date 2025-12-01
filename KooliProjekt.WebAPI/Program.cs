@@ -1,6 +1,7 @@
 using FluentValidation;
 using KooliProjekt.Application.Behaviors;
 using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,6 +39,10 @@ namespace KooliProjekt.WebAPI
                 config.AddOpenBehavior(typeof(ValidationBehavior<,>));
                 config.AddOpenBehavior(typeof(TransactionalBehavior<,>));
             });
+
+            builder.Services.AddScoped<i_arve_repository, arve_repository>();
+            builder.Services.AddScoped<i_auto_repository, auto_repository>();
+            builder.Services.AddScoped<i_klient_repository, klient_repository>();
 
             var app = builder.Build();
 

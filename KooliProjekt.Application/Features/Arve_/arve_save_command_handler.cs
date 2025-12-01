@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation.Validators;
 using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Data.Repositories;
 using KooliProjekt.Application.Infrastructure.Paging;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
@@ -15,9 +16,9 @@ namespace KooliProjekt.Application.Features.Arve_
 {
     public class arve_save_command_handler : IRequestHandler<arve_save_command, OperationResult>
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly i_arve_repository _dbContext;
 
-        public arve_save_command_handler(ApplicationDbContext dbContext)
+        public arve_save_command_handler(i_arve_repository dbContext)
         {
             _dbContext = dbContext;
         }
@@ -27,23 +28,18 @@ namespace KooliProjekt.Application.Features.Arve_
             var result = new OperationResult();
 
             var list = new Arve();
-            if(request.Id == 0)
+            if(request.Id != 0)
             {
-                await _dbContext.to_arve.AddAsync(list);
-            }
-            else
-            {
-                list = await _dbContext.to_arve.FindAsync(request.Id);
-                //_dbContext.ToDoLists.Update(list);
+                list = await _dbContext.GetByIdAsync(request.Id);
             }
 
-            list.id = request.Id;
+            list.Id = request.Id;
             list.arve_omanik = request.arve_omanik;
             list.summa = request.summa;
             list.rendi_aeg = request.rendi_aeg;
 
 
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveAsync(list);
 
             return result;
         }

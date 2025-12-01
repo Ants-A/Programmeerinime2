@@ -27,7 +27,7 @@ namespace KooliProjekt.Application.Features.Auto_
             var result = new OperationResult<PagedResult<Auto>>();
             result.Value = await _db_context
                 .to_auto
-                .OrderBy(list => list.id)
+                .OrderBy(list => list.Id)
                 .GetPagedAsync(request.Page, request.PageSize); 
 
             return result;

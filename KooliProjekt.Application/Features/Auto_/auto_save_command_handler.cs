@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Data.Repositories;
 using KooliProjekt.Application.Infrastructure.Paging;
 using KooliProjekt.Application.Infrastructure.Results;
 using MediatR;
@@ -14,9 +15,9 @@ namespace KooliProjekt.Application.Features.Auto_
 {
     public class auto_save_command_handler : IRequestHandler<auto_save_command, OperationResult>
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly i_auto_repository _dbContext;
 
-        public auto_save_command_handler(ApplicationDbContext dbContext)
+        public auto_save_command_handler(i_auto_repository dbContext)
         {
             _dbContext = dbContext;
         }
@@ -26,21 +27,16 @@ namespace KooliProjekt.Application.Features.Auto_
             var result = new OperationResult();
 
             var list = new Auto();
-            if(request.Id == 0)
+            if (request.Id != 0)
             {
-                await _dbContext.to_auto.AddAsync(list);
-            }
-            else
-            {
-                list = await _dbContext.to_auto.FindAsync(request.Id);
-                //_dbContext.ToDoLists.Update(list);
+                list = await _dbContext.GetByIdAsync(request.Id);
             }
 
-            list.id = request.Id;
+            list.Id = request.Id;
             list.broneeritav = request.broneeritav;
             list.tüüp = request.tüüp;
             
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveAsync(list);
 
             return result;
         }

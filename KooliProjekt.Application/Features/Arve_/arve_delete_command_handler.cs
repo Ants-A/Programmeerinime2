@@ -26,7 +26,7 @@ namespace KooliProjekt.Application.Features.Arve_
 
             await _db_context
                 .to_arve
-                .Where(t => t.id == request.Id)
+                .Where(t => t.Id == request.Id)
                 .ExecuteDeleteAsync();
 
             return result;

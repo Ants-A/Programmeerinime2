@@ -26,7 +26,7 @@ namespace KooliProjekt.Application.Features.Klient_
 
             await _db_context
                 .to_klient
-                .Where(t => t.id == request.Id)
+                .Where(t => t.Id == request.Id)
                 .ExecuteDeleteAsync();
 
             return result;
