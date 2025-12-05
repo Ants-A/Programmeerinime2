@@ -9,8 +9,10 @@ namespace KooliProjekt.Application.Data
 {
     public class Klient : Entity
     {
+        [StringLength(64)]
         public string nimi { get; set; }
         [Required]
+        [StringLength(64)]
         public string email { get; set; }
         public int phone { get; set; }
     }

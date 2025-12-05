@@ -12,6 +12,7 @@ namespace KooliProjekt.Application.Data
         [Required]
         public bool broneeritav { get; set; }
         [Required]
+        [StringLength(32)]
         public string tüüp { get; set; }
     }
 }
