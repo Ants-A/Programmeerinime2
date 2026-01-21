@@ -32,7 +32,7 @@ namespace KooliProjekt.Application.Migrations
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     broneeritav = table.Column<bool>(type: "bit", nullable: false),
-                    tüüp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    tüüp = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,8 +45,8 @@ namespace KooliProjekt.Application.Migrations
                 {
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    nimi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    nimi = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: true),
+                    email = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     phone = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

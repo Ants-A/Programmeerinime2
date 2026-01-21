@@ -1,19 +1,20 @@
-﻿using KooliProjekt.Application.Behaviors;
-using KooliProjekt.Application.Infrastructure.Results;
-using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KooliProjekt.Application.Features.Arve_
+namespace KooliProjekt.Application.DTO
 {
-    public class arve_save_command : IRequest<OperationResult>, ITransactional
+    public class Arve_dto
     {
         public int id { get; set; }
+        [Required]
         public int arve_omanik { get; set; }
+        [Required]
         public int summa { get; set; }
+        [Required]
         public int rendi_aeg { get; set; }
     }
 }

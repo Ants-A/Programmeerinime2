@@ -27,17 +27,17 @@ namespace KooliProjekt.Application.Features.Arve_
             var result = new OperationResult();
 
             var list = new Arve();
-            if(request.Id == 0)
+            if(request.id == 0)
             {
                 await _dbContext.to_arve.AddAsync(list);
             }
             else
             {
-                list = await _dbContext.to_arve.FindAsync(request.Id);
+                list = await _dbContext.to_arve.FindAsync(request.id);
                 //_dbContext.ToDoLists.Update(list);
             }
 
-            list.id = request.Id;
+            list.id = request.id;
             list.arve_omanik = request.arve_omanik;
             list.summa = request.summa;
             list.rendi_aeg = request.rendi_aeg;
