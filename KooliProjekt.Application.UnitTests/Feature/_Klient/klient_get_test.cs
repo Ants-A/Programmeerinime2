@@ -1,5 +1,7 @@
 ﻿using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Features.Auto_;
 using KooliProjekt.Application.Features.Klient_;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,48 @@ namespace KooliProjekt.Application.UnitTests.Features
 {
     public class klient_get_test : TestBase
     {
+        protected ApplicationDbContext GetFaultyDbContext()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>();
+            var dbContext = new ApplicationDbContext(options.Options);
+
+            return dbContext;
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-10)]
+        public async Task Get_should_return_null_request_id_is_zero_or_less(int id)
+        {
+            // Arrange
+            var dbContext = GetFaultyDbContext();
+            var query = new klient_get_query { Id = id };
+            var handler = new klient_get_handler(dbContext);
+            var klient = new Klient
+            {
+                email = "mdea.midagi@techno.ee",
+                nimi = "Toomas",
+                phone = 537282012,
+            };
+            await DbContext.to_klient.AddAsync(klient);
+            await DbContext.SaveChangesAsync();
+
+            // Act
+            var result = await handler.Handle(query, CancellationToken.None);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.False(result.HasErrors);
+            Assert.Null(result.Value);
+        }
+
+        [Fact]
+        public async Task Get_should_return_argument_null_exeption_if_request_null()
+        {
+            var handler = new klient_get_handler(DbContext);
+            // Act & Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(() => handler.Handle(null!, CancellationToken.None));
+        }
         [Fact]
         public async Task Get_throws_if_dbcontext_is_null()
         {

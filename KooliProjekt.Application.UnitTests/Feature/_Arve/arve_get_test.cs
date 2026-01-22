@@ -1,6 +1,6 @@
 ﻿using KooliProjekt.Application.Data;
 using KooliProjekt.Application.Features.Arve_;
-using KooliProjekt.Application.Features.Klient_;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,50 @@ namespace KooliProjekt.Application.UnitTests.Features
 {
     public class arve_get_test : TestBase
     {
+        protected ApplicationDbContext GetFaultyDbContext()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>();
+            var dbContext = new ApplicationDbContext(options.Options);
+
+            return dbContext;
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-10)]
+        public async Task Get_should_return_null_request_id_is_zero_or_less(int id)
+        {
+            // Arrange
+            var dbContext = GetFaultyDbContext();
+            var query = new arve_get_query { Id = id };
+            var handler = new arve_get_handler(dbContext);
+            var arve = new Arve
+            {
+                arve_omanik = 23,
+                rendi_aeg = 69,
+                summa = 420,
+            };
+            await DbContext.to_arve.AddAsync(arve);
+            await DbContext.SaveChangesAsync();
+
+            // Act
+            var result = await handler.Handle(query, CancellationToken.None);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.False(result.HasErrors);
+            Assert.Null(result.Value);
+        }
+
+        [Fact]
+        public async Task Get_should_return_argument_null_exeption_if_request_null()
+        {
+            var handler = new arve_get_handler(DbContext);
+            // Act & Assert
+            await Assert.ThrowsAsync<ArgumentNullException>(() => handler.Handle(null!, CancellationToken.None));
+        }
+
+
         [Fact]
         public async Task Get_throws_if_dbcontext_is_null()
         {

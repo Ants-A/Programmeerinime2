@@ -28,6 +28,16 @@ namespace KooliProjekt.Application.Features.Arve_
         {
             var result = new OperationResult<Arve_dto>();
 
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (request.Id <= 0)
+            {
+                return result;
+            }
+
             result.Value = await _dbContext
                 .to_arve
                 .Where(list => list.id == request.Id)

@@ -27,6 +27,16 @@ namespace KooliProjekt.Application.Features.Auto_
         {
             var result = new OperationResult<Auto_dto>();
 
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (request.Id <= 0)
+            {
+                return result;
+            }
+
             result.Value = await _dbContext
                 .to_auto
                 .Where(list => list.id == request.Id)

@@ -12,6 +12,7 @@ namespace KooliProjekt.Application.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
+
         public DbSet<Klient> to_klient {  get; set; }
         public DbSet<Auto> to_auto { get; set; }
         public DbSet<Arve> to_arve { get; set; }
