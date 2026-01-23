@@ -17,17 +17,40 @@ namespace KooliProjekt.Application.Features.Arve_
 
         public arve_delete_command_handler(ApplicationDbContext db_context)
         {
+            if (db_context == null)
+            {
+                throw new ArgumentNullException(nameof(db_context));
+            }
             _db_context = db_context;
         }
 
         public async Task<OperationResult> Handle(arve_delete_command request, CancellationToken cancellationToken)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             var result = new OperationResult();
 
-            await _db_context
+            if (request.Id <= 0)
+            {
+                return result;
+            }
+
+            var arve = await _db_context
                 .to_arve
-                .Where(t => t.id == request.Id)
-                .ExecuteDeleteAsync();
+                .Where(a => a.id == request.Id)
+                .FirstOrDefaultAsync();
+
+            if (arve == null)
+            {
+                return result;
+            }
+
+            _db_context.Remove(arve);
+
+            await _db_context.SaveChangesAsync();
 
             return result;
         }
