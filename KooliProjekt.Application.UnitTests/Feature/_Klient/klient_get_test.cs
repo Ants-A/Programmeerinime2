@@ -12,7 +12,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace KooliProjekt.Application.UnitTests.Features
 {
-    public class klient_get_test : TestBase
+    public class klient_get_test : ServiceTestBase
     {
         protected ApplicationDbContext GetFaultyDbContext()
         {

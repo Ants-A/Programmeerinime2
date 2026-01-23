@@ -19,12 +19,27 @@ namespace KooliProjekt.Application.Features.Klient_
 
         public klient_query_handler(ApplicationDbContext db_context)
         {
+            if (db_context == null)
+            {
+                throw new ArgumentNullException(nameof(db_context));
+            }
             _db_context = db_context;
         }
 
         public async Task<OperationResult<PagedResult<Klient>>> Handle(klient_query request, CancellationToken cancellationToken)
         {
             var result = new OperationResult<PagedResult<Klient>>();
+
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (request.Page <= 0)
+            {
+                return result;
+            }
+
             result.Value = await _db_context
                 .to_klient
                 .OrderBy(list => list.id)

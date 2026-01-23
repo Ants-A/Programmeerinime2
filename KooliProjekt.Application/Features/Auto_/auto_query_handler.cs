@@ -19,12 +19,27 @@ namespace KooliProjekt.Application.Features.Auto_
 
         public auto_query_handler(ApplicationDbContext db_context)
         {
+            if (db_context == null)
+            {
+                throw new ArgumentNullException(nameof(db_context));
+            }
             _db_context = db_context;
         }
 
         public async Task<OperationResult<PagedResult<Auto>>> Handle(auto_query request, CancellationToken cancellationToken)
         {
             var result = new OperationResult<PagedResult<Auto>>();
+
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (request.Page <= 0)
+            {
+                return result;
+            }
+
             result.Value = await _db_context
                 .to_auto
                 .OrderBy(list => list.id)

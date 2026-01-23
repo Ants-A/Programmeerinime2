@@ -12,7 +12,7 @@ using Xunit;
 
 namespace KooliProjekt.Application.UnitTests.Features
 {
-    public class auto_get_test : TestBase
+    public class auto_get_test : ServiceTestBase
     {
         protected ApplicationDbContext GetFaultyDbContext()
         {

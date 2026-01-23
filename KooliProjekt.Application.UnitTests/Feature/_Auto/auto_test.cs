@@ -1,5 +1,5 @@
 ﻿using KooliProjekt.Application.Data;
-using KooliProjekt.Application.Features.Arve_;
+using KooliProjekt.Application.Features.Auto_;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using Xunit;
 
 namespace KooliProjekt.Application.UnitTests.Features
 {
-    public class arve_get_test : ServiceTestBase
+    public class auto_test : ServiceTestBase
     {
         protected ApplicationDbContext GetFaultyDbContext()
         {
@@ -23,19 +23,18 @@ namespace KooliProjekt.Application.UnitTests.Features
         [Theory]
         [InlineData(0)]
         [InlineData(-10)]
-        public async Task Get_should_return_null_request_id_is_zero_or_less(int id)
+        public async Task Get_should_return_null_request_page_is_less_than_or_equal_to_zero(int page)
         {
             // Arrange
             var dbContext = GetFaultyDbContext();
-            var query = new arve_get_query { Id = id };
-            var handler = new arve_get_handler(dbContext);
-            var arve = new Arve
+            var query = new auto_query { Page = page, PageSize = 10, };
+            var handler = new auto_query_handler(dbContext);
+            var auto = new Auto
             {
-                arve_omanik = 23,
-                rendi_aeg = 69,
-                summa = 420,
+                broneeritav = true,
+                tüüp = "Honda",
             };
-            await DbContext.to_arve.AddAsync(arve);
+            await DbContext.to_auto.AddAsync(auto);
             await DbContext.SaveChangesAsync();
 
             // Act
@@ -50,7 +49,7 @@ namespace KooliProjekt.Application.UnitTests.Features
         [Fact]
         public async Task Get_should_return_argument_null_exeption_if_request_null()
         {
-            var handler = new arve_get_handler(DbContext);
+            var handler = new auto_query_handler(DbContext);
             // Act & Assert
             await Assert.ThrowsAsync<ArgumentNullException>(() => handler.Handle(null!, CancellationToken.None));
         }
@@ -61,10 +60,10 @@ namespace KooliProjekt.Application.UnitTests.Features
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
-                new arve_get_handler(null);
+                new auto_query_handler(null);
             });
-            var query = new arve_get_query { Id = 0 };
-            var handler = new arve_get_handler(DbContext);
+            var query = new auto_query { Page = 0, PageSize = 5 };
+            var handler = new auto_query_handler(DbContext);
             var result = await handler.Handle(query, CancellationToken.None);
 
             Assert.Null(result.Value);
@@ -74,15 +73,14 @@ namespace KooliProjekt.Application.UnitTests.Features
         public async Task Get_should_return_object_if_object_exists()
         {
             // Arrange
-            var query = new arve_get_query { Id = 1 };
-            var arve = new Arve 
-            { 
-                arve_omanik = 23,
-                rendi_aeg = 69,
-                summa = 420,
+            var query = new auto_query { Page = 1, PageSize = 5 };
+            var auto = new Auto
+            {
+                broneeritav = true,
+                tüüp = "Honda",
             };
-            var handler = new arve_get_handler(DbContext);
-            await DbContext.to_arve.AddAsync(arve);  
+            var handler = new auto_query_handler(DbContext);
+            await DbContext.to_auto.AddAsync(auto);
             await DbContext.SaveChangesAsync();
 
             // Act
@@ -91,22 +89,21 @@ namespace KooliProjekt.Application.UnitTests.Features
             // Assert
             Assert.False(result.HasErrors);
             Assert.NotNull(result.Value);
-            Assert.Equal(1, result.Value.id); // Cast to Arve before accessing Id
+            Assert.Equal(1, result.Value.CurrentPage); // Cast to Arve before accessing Id
         }
 
         [Fact]
         public async Task Get_should_return_null_if_object_does_not_exist()
         {
             // Arrange
-            var query = new arve_get_query { Id = 101 };
-            var arve = new Arve
+            var query = new auto_query { Page = 101, PageSize = 10 };
+            var auto = new Auto
             {
-                arve_omanik = 23,
-                rendi_aeg = 69,
-                summa = 420,
+                broneeritav = true,
+                tüüp = "Honda",
             };
-            var handler = new arve_get_handler(DbContext);
-            await DbContext.to_arve.AddAsync(arve);
+            var handler = new auto_query_handler(DbContext);
+            await DbContext.to_auto.AddAsync(auto);
             await DbContext.SaveChangesAsync();
 
             // Act
@@ -114,7 +111,7 @@ namespace KooliProjekt.Application.UnitTests.Features
 
             // Assert
             Assert.False(result.HasErrors);
-            Assert.Null(result.Value);
+            Assert.Empty(result.Value.Results);
         }
     }
 }

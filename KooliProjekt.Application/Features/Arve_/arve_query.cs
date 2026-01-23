@@ -14,5 +14,6 @@ namespace KooliProjekt.Application.Features.Arve_
     {
         public int Page { get; set; }
         public int PageSize { get; set; }
+        public int MaxPageSize { get; set; } = 20;
     }
 }
