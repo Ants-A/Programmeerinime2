@@ -39,10 +39,10 @@ namespace KooliProjekt.Application.Features.Auto_
 
             result.Value = await _dbContext
                 .to_auto
-                .Where(list => list.id == request.Id)
+                .Where(list => list.Id == request.Id)
                 .Select(list => new Auto_dto
                 {
-                    id = list.id,   
+                    Id = list.Id,   
                     broneeritav = list.broneeritav,
                     tüüp = list.tüüp,
                 })

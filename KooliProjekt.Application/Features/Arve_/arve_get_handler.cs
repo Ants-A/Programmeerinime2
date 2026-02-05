@@ -40,10 +40,10 @@ namespace KooliProjekt.Application.Features.Arve_
 
             result.Value = await _dbContext
                 .to_arve
-                .Where(list => list.id == request.Id)
+                .Where(list => list.Id == request.Id)
                 .Select(list => new Arve_dto
                 {
-                    id = list.id,
+                    Id = list.Id,
                     arve_omanik = list.arve_omanik,
                     rendi_aeg = list.rendi_aeg,
                     summa = list.summa,

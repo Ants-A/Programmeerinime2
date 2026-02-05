@@ -26,11 +26,11 @@ namespace KooliProjekt.Application.Migrations
 
             modelBuilder.Entity("KooliProjekt.Application.Data.Arve", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("arve_omanik")
                         .HasColumnType("int");
@@ -41,18 +41,18 @@ namespace KooliProjekt.Application.Migrations
                     b.Property<int>("summa")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("to_arve");
                 });
 
             modelBuilder.Entity("KooliProjekt.Application.Data.Auto", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("broneeritav")
                         .HasColumnType("bit");
@@ -62,18 +62,18 @@ namespace KooliProjekt.Application.Migrations
                         .HasMaxLength(32)
                         .HasColumnType("nvarchar(32)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("to_auto");
                 });
 
             modelBuilder.Entity("KooliProjekt.Application.Data.Klient", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("email")
                         .IsRequired()
@@ -87,7 +87,7 @@ namespace KooliProjekt.Application.Migrations
                     b.Property<int>("phone")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("to_klient");
                 });

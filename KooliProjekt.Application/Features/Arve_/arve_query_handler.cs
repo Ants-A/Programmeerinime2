@@ -42,7 +42,7 @@ namespace KooliProjekt.Application.Features.Arve_
 
             result.Value = await _db_context
                 .to_arve
-                .OrderBy(list => list.id)
+                .OrderBy(list => list.Id)
                 .GetPagedAsync(request.Page, request.PageSize);
 
             return result;

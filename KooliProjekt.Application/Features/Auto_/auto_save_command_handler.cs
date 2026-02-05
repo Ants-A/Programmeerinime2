@@ -18,12 +18,26 @@ namespace KooliProjekt.Application.Features.Auto_
 
         public auto_save_command_handler(ApplicationDbContext dbContext)
         {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
             _dbContext = dbContext;
         }
 
         public async Task<OperationResult> Handle(auto_save_command request, CancellationToken cancellationToken)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             var result = new OperationResult();
+            if (request.Id < 0)
+            {
+                result.AddPropertyError(nameof(request.Id), "Id cannot be negative");
+                return result;
+            }
 
             var list = new Auto();
             if(request.Id == 0)
@@ -33,10 +47,13 @@ namespace KooliProjekt.Application.Features.Auto_
             else
             {
                 list = await _dbContext.to_auto.FindAsync(request.Id);
-                //_dbContext.ToDoLists.Update(list);
+                if (list == null)
+                {
+                    result.AddError("Cannot find list with Id " + request.Id);
+                    return result;
+                }
             }
 
-            list.id = request.Id;
             list.broneeritav = request.broneeritav;
             list.tüüp = request.tüüp;
             

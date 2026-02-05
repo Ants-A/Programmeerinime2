@@ -9,7 +9,7 @@ namespace KooliProjekt.Application.Data
 {
     public class Auto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required]
         public bool broneeritav { get; set; }
         [Required]

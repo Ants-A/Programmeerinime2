@@ -9,7 +9,7 @@ namespace KooliProjekt.Application.DTO
 {
     public class Arve_dto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required]
         public int arve_omanik { get; set; }
         [Required]

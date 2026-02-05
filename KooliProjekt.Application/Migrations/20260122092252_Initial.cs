@@ -14,7 +14,7 @@ namespace KooliProjekt.Application.Migrations
                 name: "to_arve",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     arve_omanik = table.Column<int>(type: "int", nullable: false),
                     summa = table.Column<int>(type: "int", nullable: false),
@@ -22,28 +22,28 @@ namespace KooliProjekt.Application.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_to_arve", x => x.id);
+                    table.PrimaryKey("PK_to_arve", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "to_auto",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     broneeritav = table.Column<bool>(type: "bit", nullable: false),
                     tüüp = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_to_auto", x => x.id);
+                    table.PrimaryKey("PK_to_auto", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "to_klient",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     nimi = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: true),
                     email = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
@@ -51,7 +51,7 @@ namespace KooliProjekt.Application.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_to_klient", x => x.id);
+                    table.PrimaryKey("PK_to_klient", x => x.Id);
                 });
         }
 

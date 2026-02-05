@@ -24,9 +24,9 @@ namespace KooliProjekt.WebAPI.Controllers
 
         [HttpGet]
         [Route("Get")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(int Id)
         {
-            var query = new auto_get_query { Id = id };
+            var query = new auto_get_query { Id = Id };
             var response = await _mediator.Send(query);
 
             return Result(response);

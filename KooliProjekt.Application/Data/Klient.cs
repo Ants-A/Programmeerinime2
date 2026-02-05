@@ -9,7 +9,7 @@ namespace KooliProjekt.Application.Data
 {
     public class Klient
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [StringLength(32)]
         public string nimi { get; set; }
         [Required]

@@ -9,7 +9,7 @@ namespace KooliProjekt.Application.DTO
 {
     public class Klient_dto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [StringLength(32)]
         public string nimi { get; set; }
         [Required]

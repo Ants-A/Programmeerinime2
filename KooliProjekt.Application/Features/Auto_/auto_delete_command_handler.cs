@@ -40,7 +40,7 @@ namespace KooliProjekt.Application.Features.Auto_
 
             var auto = await _db_context
                 .to_auto
-                .Where(a => a.id == request.Id)
+                .Where(a => a.Id == request.Id)
                 .FirstOrDefaultAsync();
 
             if (auto == null)

@@ -23,11 +23,11 @@ namespace KooliProjekt.Application.UnitTests.Features
         [Theory]
         [InlineData(0)]
         [InlineData(-10)]
-        public async Task Get_should_return_null_request_id_is_zero_or_less(int id)
+        public async Task Get_should_return_null_request_id_is_zero_or_less(int Id)
         {
             // Arrange
             var dbContext = GetFaultyDbContext();
-            var query = new arve_get_query { Id = id };
+            var query = new arve_get_query { Id = Id };
             var handler = new arve_get_handler(dbContext);
             var arve = new Arve
             {
@@ -91,7 +91,7 @@ namespace KooliProjekt.Application.UnitTests.Features
             // Assert
             Assert.False(result.HasErrors);
             Assert.NotNull(result.Value);
-            Assert.Equal(1, result.Value.id); // Cast to Arve before accessing Id
+            Assert.Equal(1, result.Value.Id); // Cast to Arve before accessing Id
         }
 
         [Fact]

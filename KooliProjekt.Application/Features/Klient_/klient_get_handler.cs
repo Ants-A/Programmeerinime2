@@ -39,10 +39,10 @@ namespace KooliProjekt.Application.Features.Klient_
 
             result.Value = await _dbContext
                 .to_klient
-                .Where(list => list.id == request.Id)
+                .Where(list => list.Id == request.Id)
                 .Select(list => new Klient_dto
                 {
-                    id = list.id,
+                    Id = list.Id,
                     email = list.email,
                     nimi = list.nimi,
                     phone = list.phone,

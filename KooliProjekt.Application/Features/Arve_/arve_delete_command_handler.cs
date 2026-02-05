@@ -40,7 +40,7 @@ namespace KooliProjekt.Application.Features.Arve_
 
             var arve = await _db_context
                 .to_arve
-                .Where(a => a.id == request.Id)
+                .Where(a => a.Id == request.Id)
                 .FirstOrDefaultAsync();
 
             if (arve == null)

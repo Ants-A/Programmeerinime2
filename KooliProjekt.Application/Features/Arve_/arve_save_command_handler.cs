@@ -19,25 +19,42 @@ namespace KooliProjekt.Application.Features.Arve_
 
         public arve_save_command_handler(ApplicationDbContext dbContext)
         {
+            if (dbContext == null)
+            {
+                throw new ArgumentNullException(nameof(dbContext));
+            }
             _dbContext = dbContext;
         }
 
         public async Task<OperationResult> Handle(arve_save_command request, CancellationToken cancellationToken)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
             var result = new OperationResult();
+            if (request.Id < 0)
+            {
+                result.AddPropertyError(nameof(request.Id), "Id cannot be negative");
+                return result;
+            }
 
             var list = new Arve();
-            if(request.id == 0)
+            if(request.Id == 0)
             {
                 await _dbContext.to_arve.AddAsync(list);
             }
             else
             {
-                list = await _dbContext.to_arve.FindAsync(request.id);
-                //_dbContext.ToDoLists.Update(list);
+                list = await _dbContext.to_arve.FindAsync(request.Id);
+                if (list == null)
+                {
+                    result.AddError("Cannot find list with Id " + request.Id);
+                    return result;
+                }
             }
 
-            list.id = request.id;
             list.arve_omanik = request.arve_omanik;
             list.summa = request.summa;
             list.rendi_aeg = request.rendi_aeg;

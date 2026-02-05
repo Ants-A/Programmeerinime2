@@ -50,10 +50,10 @@ namespace KooliProjekt.Application.UnitTests.Features
         [Theory]
         [InlineData(0)]
         [InlineData(-1)]
-        public async Task Delete_should_return_when_request_id_is_null_or_negative(int id)
+        public async Task Delete_should_return_when_request_id_is_null_or_negative(int Id)
         {
             // Arrange
-            var query = new klient_delete_command { Id = id };
+            var query = new klient_delete_command { Id = Id };
             var faultyDbContext = GetFaultyDbContext();
             var handler = new klient_delete_command_handler(faultyDbContext);
 

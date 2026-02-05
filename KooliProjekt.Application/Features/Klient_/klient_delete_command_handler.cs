@@ -40,7 +40,7 @@ namespace KooliProjekt.Application.Features.Klient_
 
             var klient = await _db_context
                 .to_klient
-                .Where(a => a.id == request.Id)
+                .Where(a => a.Id == request.Id)
                 .FirstOrDefaultAsync();
 
             if (klient == null)

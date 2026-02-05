@@ -11,7 +11,7 @@ namespace KooliProjekt.Application.Features.Arve_
 {
     public class arve_save_command : IRequest<OperationResult>, ITransactional
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int arve_omanik { get; set; }
         public int summa { get; set; }
         public int rendi_aeg { get; set; }
