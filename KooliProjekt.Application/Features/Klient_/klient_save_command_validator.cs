@@ -10,9 +10,9 @@ namespace KooliProjekt.Application.Features.Klient_
     {
         public klient_save_command_validator(ApplicationDbContext context)
         {
-            RuleFor(x => x.nimi)
-                .NotEmpty().WithMessage("Nimi on vajalik")
-                .MaximumLength(32).WithMessage("Nimi ei saa olla pikkem kui 32 tähte")
+            RuleFor(x => x.email)
+                .NotEmpty().WithMessage("Email on vajalik")
+                .MaximumLength(32).WithMessage("Email ei saa olla pikkem kui 32 tähte")
                 // Oma loogikaga valideerimise reegel
                 // Siin võib kasutada DbContexti klassi
                 .Custom((s, context) =>

@@ -12,14 +12,6 @@ namespace KooliProjekt.Application.UnitTests.Features
 {
     public class klient_delete_test : ServiceTestBase
     {
-        protected ApplicationDbContext GetFaultyDbContext()
-        {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>();
-            var dbContext = new ApplicationDbContext(options.Options);
-
-            return dbContext;
-        }
-
         [Fact]
         public void Delete_should_throw_when_dbcontext_is_null()
         {

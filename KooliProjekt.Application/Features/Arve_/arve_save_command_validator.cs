@@ -12,6 +12,7 @@ namespace KooliProjekt.Application.Features.Arve_
         {
             RuleFor(x => x.arve_omanik)
                 .NotEmpty().WithMessage("Arve omanikku on vaja")
+                .NotEqual(0).WithMessage("Omanik ei saa olla 0")
                 // Oma loogikaga valideerimise reegel
                 // Siin võib kasutada DbContexti klassi
                 .Custom((s, context) =>

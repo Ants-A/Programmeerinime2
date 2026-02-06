@@ -1,4 +1,5 @@
 ﻿using KooliProjekt.Application.Data;
+using KooliProjekt.Application.Features.Auto_;
 using KooliProjekt.Application.Features.Klient_;
 using KooliProjekt.Application.UnitTests;
 using Microsoft.EntityFrameworkCore;
@@ -13,13 +14,6 @@ namespace KooliProjekt.UnitTests.Feature._Klient
 {
     public class klient_save_test : ServiceTestBase
     {
-        protected ApplicationDbContext GetFaultyDbContext()
-        {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>();
-            var dbContext = new ApplicationDbContext(options.Options);
-
-            return dbContext;
-        }
         [Fact]
         public void Save_should_throw_when_dbcontext_is_null()
         {
@@ -118,6 +112,38 @@ namespace KooliProjekt.UnitTests.Feature._Klient
             // Assert
             Assert.NotNull(result);
             Assert.True(result.HasErrors);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData("01234567890123456789012345678901234567890123456789000")]
+        public void SaveValidator_should_return_false_when_title_is_invalid(string title)
+        {
+            // Arrange
+            var validator = new klient_save_command_validator(DbContext);
+            var command = new klient_save_command { Id = 0, email = title, nimi = "Mats Mikkor", phone = 542729101 };
+
+            // Act
+            var result = validator.Validate(command);
+
+            // Assert
+            Assert.False(result.IsValid);
+            Assert.Equal(nameof(klient_save_command.email), result.Errors.First().PropertyName);
+        }
+
+        [Fact]
+        public void SaveValidator_should_return_true_when_title_is_valid()
+        {
+            // Arrange
+            var validator = new klient_save_command_validator(DbContext);
+            var command = new klient_save_command { Id = 0, email = "example@tptlive.ee", nimi = "Mats Mikkor", phone = 542729101 };
+
+            // Act
+            var result = validator.Validate(command);
+
+            // Assert
+            Assert.True(result.IsValid);
         }
     }
 }

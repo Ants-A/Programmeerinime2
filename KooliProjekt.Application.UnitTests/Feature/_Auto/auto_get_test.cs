@@ -14,14 +14,6 @@ namespace KooliProjekt.Application.UnitTests.Features
 {
     public class auto_get_test : ServiceTestBase
     {
-        protected ApplicationDbContext GetFaultyDbContext()
-        {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>();
-            var dbContext = new ApplicationDbContext(options.Options);
-
-            return dbContext;
-        }
-
         [Theory]
         [InlineData(0)]
         [InlineData(-10)]

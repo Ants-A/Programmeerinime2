@@ -13,13 +13,6 @@ namespace KooliProjekt.UnitTests.Feature._Arve
 {
     public class arve_save_test : ServiceTestBase
     {
-        protected ApplicationDbContext GetFaultyDbContext()
-        {
-            var options = new DbContextOptionsBuilder<ApplicationDbContext>();
-            var dbContext = new ApplicationDbContext(options.Options);
-
-            return dbContext;
-        }
         [Fact]
         public void Save_should_throw_when_dbcontext_is_null()
         {
@@ -118,6 +111,37 @@ namespace KooliProjekt.UnitTests.Feature._Arve
             // Assert
             Assert.NotNull(result);
             Assert.True(result.HasErrors);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(null)]
+        public void SaveValidator_should_return_false_when_title_is_invalid(int omanik)
+        {
+            // Arrange
+            var validator = new arve_save_command_validator(DbContext);
+            var command = new arve_save_command { Id = 0, arve_omanik = omanik, rendi_aeg = 69, summa = 420 };
+
+            // Act
+            var result = validator.Validate(command);
+
+            // Assert
+            Assert.False(result.IsValid);
+            Assert.Equal(nameof(arve_save_command.arve_omanik), result.Errors.First().PropertyName);
+        }
+
+        [Fact]
+        public void SaveValidator_should_return_true_when_title_is_valid()
+        {
+            // Arrange
+            var validator = new arve_save_command_validator(DbContext);
+            var command = new arve_save_command { Id = 0, arve_omanik = 69, rendi_aeg = 69, summa = 420 };
+
+            // Act
+            var result = validator.Validate(command);
+
+            // Assert
+            Assert.True(result.IsValid);
         }
     }
 }
