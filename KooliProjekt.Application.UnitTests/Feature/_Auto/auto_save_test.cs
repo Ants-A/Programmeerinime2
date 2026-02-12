@@ -15,6 +15,14 @@ namespace KooliProjekt.UnitTests.Feature._Auto
     public class auto_save_test : ServiceTestBase
     {
         [Fact]
+        public void Save_should_throw_when_dbcontext_is_null()
+        {
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new auto_save_command_handler(null);
+            });
+        }
+        [Fact]
         public async Task Save_should_throw_when_request_is_null()
         {
             // Arrange

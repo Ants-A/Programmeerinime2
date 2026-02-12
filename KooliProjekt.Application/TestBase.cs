@@ -1,9 +1,11 @@
 ﻿using KooliProjekt.Application.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace KooliProjekt.Application.UnitTests
 {
+    [ExcludeFromCodeCoverage]
     public abstract class TestBase : IDisposable
     {
         private ApplicationDbContext _dbContext;
