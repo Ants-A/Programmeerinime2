@@ -42,7 +42,8 @@ namespace KooliProjekt.WebAPI
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment() || 
+                app.Environment.IsEnvironment("Linux"))
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
@@ -59,7 +60,7 @@ namespace KooliProjekt.WebAPI
                 db_context.Database.Migrate();
 
                 // 14.11.2025
-                // Andmete genereerimise lubame ainult Debug-režiimis
+                // Andmete genereerimise lubame ainult Debug-reï¿½iimis
             #if (DEBUG)
                 var generator = new SeedData(db_context);
                 generator.Generate();

@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "WebAPI (Linux)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${workspaceFolder}/KooliProjekt.WebAPI/bin/Debug/net8.0/KooliProjekt.WebAPI.dll",
+      "cwd": "${workspaceFolder}/KooliProjekt.WebAPI",
+      "stopAtEntry": false,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Linux"
+      },
+      "preLaunchTask": "build"
+    }
+  ]
+}
