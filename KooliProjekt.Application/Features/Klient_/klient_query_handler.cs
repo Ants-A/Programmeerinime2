@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace KooliProjekt.Application.Features.Klient_
 {
-    public class klient_query_handler : IRequest<OperationResult<PagedResult<Klient>>>
+    public class klient_query_handler : IRequestHandler<klient_query, OperationResult<PagedResult<Klient>>>
     {
         private readonly ApplicationDbContext _db_context;
 
@@ -35,9 +35,10 @@ namespace KooliProjekt.Application.Features.Klient_
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (request.Page <= 0)
+            if (request.Page <= 0 || request.PageSize <= 0 || request.PageSize > request.MaxPageSize)
             {
-                return result;
+                throw new ArgumentException(nameof(request));
+                //return result;
             }
 
             result.Value = await _db_context
