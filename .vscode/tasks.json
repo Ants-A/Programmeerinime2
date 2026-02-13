@@ -2,6 +2,16 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "prepare-app",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "export ASPNETCORE_ENVIRONMENT=Linux && docker start sqlserver || docker run -e ACCEPT_EULA=Y -e SA_PASSWORD=YourMom123! -p 1433:1433 --name sqlserver -d mcr.microsoft.com/mssql/server:2022-latest"
+      ],
+      "problemMatcher": []
+    },
+    {
       "label": "build",
       "command": "dotnet",
       "type": "process",
