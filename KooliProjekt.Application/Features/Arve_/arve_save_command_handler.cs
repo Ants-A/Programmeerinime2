@@ -36,7 +36,7 @@ namespace KooliProjekt.Application.Features.Arve_
             var result = new OperationResult();
             if (request.Id < 0)
             {
-                result.AddPropertyError(nameof(request.Id), "Id cannot be negative");
+                result.AddError("Id cannot be negative");
                 return result;
             }
 
