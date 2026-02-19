@@ -34,21 +34,6 @@ namespace KooliProjekt.IntegrationTests.Helpers
                         var linuxConfigPath = Path.Combine(projectDir, "appsettings.Linux.json");
                         conf.AddJsonFile(linuxConfigPath, optional: false);
                     }
-
-                    // --- DIAGNOSTIC: Add this temporarily ---
-                    var tempConfig = conf.Build();
-                    var connStr = tempConfig.GetConnectionString("DefaultConnection");
-                    System.Console.WriteLine($"=== OS: {RuntimeInformation.OSDescription}");
-                    System.Console.WriteLine($"=== IsLinux: {RuntimeInformation.IsOSPlatform(OSPlatform.Linux)}");
-                    System.Console.WriteLine($"=== ProjectDir: {projectDir}");
-                    System.Console.WriteLine($"=== Linux config exists: {File.Exists(Path.Combine(projectDir, "appsettings.Linux.json"))}");
-                    System.Console.WriteLine($"=== ConnectionString: {connStr}");
-                    System.Console.WriteLine($"=== Config sources count: {conf.Sources.Count}");
-                    foreach (var source in conf.Sources)
-                    {
-                        System.Console.WriteLine($"===   Source: {source}");
-                    }
-                    // --- END DIAGNOSTIC ---
                 });
             return host;
         }
