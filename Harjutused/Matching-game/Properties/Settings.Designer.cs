@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Matching_game.Properties
+namespace Matching_Game.Properties
 {
 
 

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B4EFE6FE-C008-4C59-BE95-756866DF9A01}</ProjectGuid>
+    <ProjectGuid>{A73E6AB9-5F32-4CD3-B68A-14FAD92CB3BE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Math_quiz</RootNamespace>
-    <AssemblyName>Math quiz</AssemblyName>
+    <RootNamespace>Picture_View</RootNamespace>
+    <AssemblyName>Picture-View</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -54,6 +54,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

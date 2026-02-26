@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Math_quiz
+namespace Math_Quiz
 {
     internal static class Program
     {

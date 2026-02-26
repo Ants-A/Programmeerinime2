@@ -1,4 +1,4 @@
-﻿namespace Math_quiz
+﻿namespace Math_Quiz
 {
     partial class Form1
     {

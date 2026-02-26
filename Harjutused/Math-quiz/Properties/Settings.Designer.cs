@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Math_quiz.Properties
+namespace Math_Quiz.Properties
 {
 
 

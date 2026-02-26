@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Picture_view.Properties
+namespace Picture_View.Properties
 {
 
 

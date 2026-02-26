@@ -1,4 +1,4 @@
-﻿namespace Matching_game
+﻿namespace Matching_Game
 {
     partial class Form1
     {

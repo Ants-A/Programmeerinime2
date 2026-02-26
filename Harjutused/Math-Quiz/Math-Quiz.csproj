@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{767AF1A2-6EC8-4408-B4CB-5A5BA93D07A2}</ProjectGuid>
+    <ProjectGuid>{9DB951BA-17AB-4655-A6F1-C91C87DF1BBA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Matching_game</RootNamespace>
-    <AssemblyName>Matching game</AssemblyName>
+    <RootNamespace>Math_Quiz</RootNamespace>
+    <AssemblyName>Math-Quiz</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

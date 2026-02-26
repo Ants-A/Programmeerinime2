@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Picture_view
+namespace Picture_View
 {
     internal static class Program
     {
